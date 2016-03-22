@@ -12,11 +12,13 @@ public class Tile : MonoBehaviour {
 
 	private GameObject reference;
 
+	private int type;
 	private Tile[] neighbours;
 	private bool[] walls;
 
-	public Tile(GameObject reference) {
+	public Tile(GameObject reference, int type) {
 		this.reference = reference;
+		this.type = type;
 		neighbours = new Tile[4];
 		walls = new bool[4];
 	}

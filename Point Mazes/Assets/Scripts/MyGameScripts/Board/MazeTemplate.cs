@@ -24,6 +24,10 @@ public class MazeTemplate {
 			}
 		}
 	}
+
+	public int GetType(int row, int column) {
+		return template[row, column];
+	}
 }
 
 [System.Serializable]
