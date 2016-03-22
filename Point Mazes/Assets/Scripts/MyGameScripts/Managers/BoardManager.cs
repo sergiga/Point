@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.IO;
 using System.Collections.Generic;
 
 public class BoardManager : MonoBehaviour {
@@ -16,13 +17,20 @@ public class BoardManager : MonoBehaviour {
 	private Transform gameHolder;
 	private Transform boardHolder;
 	private Transform pointHolder;
+	private MazeTemplate template;
+
+	public void Start() {
+		Initialise();
+	}
 
 	private void Initialise() {
+		TextAsset jsonFile = Resources.Load("LevelsJSON/level_1") as TextAsset;
+		template = MazeTemplate.CreateFromJSON(jsonFile.text);
 		board = new Tile[rows, columns];
 	}
 
 	private void CreateMaze() {
-
+		
 	}
 
 	private void BoardSetup() {

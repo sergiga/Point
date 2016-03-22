@@ -45,12 +45,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\MyGameScripts\Board\MazeTemplate.cs" />
      <Compile Include="Assets\Scripts\MyGameScripts\Board\Tile.cs" />
      <Compile Include="Assets\Scripts\MyGameScripts\Managers\BoardManager.cs" />
      <Compile Include="Assets\Scripts\MyGameScripts\Managers\DisplayManager.cs" />
      <Compile Include="Assets\Scripts\MyGameScripts\Managers\PlayerManager.cs" />
      <Compile Include="Assets\Scripts\MyGameScripts\SceneLoaders\LevelLoader.cs" />
      <Compile Include="Assets\Scripts\MyGenericScripts\Singleton\Singleton.cs" />
+     <None Include="Assets\Resources\LevelsJSON\level_1.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
