@@ -168,6 +168,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1251389164}
   - 114: {fileID: 1251389165}
+  - 114: {fileID: 1251389166}
   m_Layer: 0
   m_Name: Management
   m_TagString: Untagged
@@ -203,7 +204,24 @@ MonoBehaviour:
   mazeCount: 0
   start: {fileID: 0}
   exit: {fileID: 0}
-  tileGameObject: {fileID: 114146, guid: a07cd01bf6d7fb54d80884649998502c, type: 2}
+  tileGO: {fileID: 114146, guid: a07cd01bf6d7fb54d80884649998502c, type: 2}
+  pathsGO:
+  - {fileID: 149196, guid: 81d1f6e311723294da17e189417fe3c3, type: 2}
+  - {fileID: 193240, guid: 61bc60ca14a6917438bc7be38c998802, type: 2}
+  - {fileID: 135210, guid: 12b4dbecececbc24abc46eb99a5ea02b, type: 2}
+  - {fileID: 156746, guid: a6aa1904f2de53e4a8737adf399ac142, type: 2}
+  - {fileID: 153698, guid: 34c6a0ab62a5eb043b8a9f19a832ad41, type: 2}
+--- !u!114 &1251389166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1251389163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d1a1c53d56732459981d3206ca3c3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1283429901
 GameObject:
   m_ObjectHideFlags: 0
