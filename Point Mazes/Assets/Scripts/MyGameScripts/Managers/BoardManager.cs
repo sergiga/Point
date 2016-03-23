@@ -15,6 +15,7 @@ public class BoardManager : MonoBehaviour {
 	public GameObject[] pathsGO;
 
 	private List<Tile> startPoints;
+	private List<Tile> exitPoints;
 	private Tile[,] board;
 	private Transform boardHolder;
 	private MazeTemplate template;
@@ -39,6 +40,7 @@ public class BoardManager : MonoBehaviour {
 		rows = template.rows;
 		board = new Tile[rows, columns];
 		startPoints = new List<Tile>();
+		exitPoints = new List<Tile>();
 		mazeCount = 0;
 	}
 
@@ -79,6 +81,7 @@ public class BoardManager : MonoBehaviour {
 				board[y, x].SetNeighbours(neighbours);
 			}
 		}
+		startPoints.Sort(delegate (Tile t1, Tile t2) { return t1.mazeId.CompareTo(t2.mazeId); } );
 	}
 
 	/* Create the path of the maze with backtracking */
@@ -86,7 +89,6 @@ public class BoardManager : MonoBehaviour {
 		Tile currentTile = start;
 		int[] neighbours = new int[4];
 		List<Tile> stack = new List<Tile> ();
-
 		stack.Add(currentTile);
 		while (stack.Count > 0) {
 			int freeNeighbourCount = 0;
@@ -110,10 +112,10 @@ public class BoardManager : MonoBehaviour {
 			else {
 				stack.Remove(currentTile);
 				currentTile.BuildWalls();
-				/*if (currentTile.walls.wallCount == 3) {
-					deadEnds.Add(currentTile);
-					currentTile.SetTileType (TileType.DeadEnd);
-				} */
+				if (currentTile.wallCount == 3 && exitPoints.Count < mazeId && currentTile.mazeId < 10) {
+					exitPoints.Add(currentTile);
+					currentTile.mazeId = (mazeId * 10) + 1;
+				}
 				if (stack.Count > 0) {
 					currentTile = stack[stack.Count-1];
 				}
@@ -135,7 +137,15 @@ public class BoardManager : MonoBehaviour {
 							rotation.z = 90 * i;
 						}
 					}
-					renderIndex = 0;
+					if (tile.mazeId >= 10 && (tile.mazeId % 10) == 0) {
+						renderIndex = 5;
+					}
+					else if (tile.mazeId >= 10 && (tile.mazeId % 10) == 1) {
+						renderIndex = 6;
+					}
+					else {
+						renderIndex = 0;
+					}
 				} 
 				else if (tile.wallCount == 2) {
 					if (!tile.IsWall(Direction.Top) && !tile.IsWall(Direction.Bottom)) { 
