@@ -19,6 +19,9 @@ public class BoardManager : MonoBehaviour {
 	private Transform boardHolder;
 	private MazeTemplate template;
 
+	private float maxBoardWidth = 5.0f;
+	private float maxBoardHeight = 7.0f;
+
 	public void Start() {
 		Initialise();
 		BoardSetup();
@@ -41,12 +44,12 @@ public class BoardManager : MonoBehaviour {
 
 	/* Lay out the Tiles and set their neighbours Tiles */
 	private void BoardSetup () {
-		float cellSize = 1.0f;
-		float boardHeight = cellSize * rows;
-		float boardWidth = cellSize * columns;
+		float boardHeight = Mathf.Clamp(rows, rows, maxBoardHeight);
+		float boardWidth = Mathf.Clamp(columns, columns, maxBoardWidth);
+		float cellSize = Mathf.Min(boardHeight / rows, boardWidth / columns);
 		boardHolder = new GameObject("Board").transform;
 
-		Vector3 worldTopLeft = transform.position - (Vector3.right * boardWidth / 2) + (Vector3.up * boardHeight / 2);
+		Vector3 worldTopLeft = transform.position - (Vector3.right * (cellSize * columns) / 2) + (Vector3.up * (cellSize * rows) / 2);
 
 		for (int y = 0; y < rows; y++) {
 			for (int x = 0; x < columns; x++) {
@@ -55,6 +58,7 @@ public class BoardManager : MonoBehaviour {
 				Tile currentTile;
 				tile = Instantiate(tileGO, worldPoint, Quaternion.identity) as GameObject;
 				tile.transform.parent = boardHolder;
+				tile.transform.localScale = new Vector3(cellSize, cellSize, cellSize);
 				tile.name = "Tile" + y + x;
 				currentTile = new Tile(tile, template.GetId(y, x));
 				board[y, x] = currentTile;
@@ -173,6 +177,7 @@ public class BoardManager : MonoBehaviour {
 				GameObject go = Instantiate (pathsGO[renderIndex], Vector3.zero, Quaternion.identity) as GameObject;
 				go.transform.parent = tile.reference.transform;
 				go.transform.localPosition = Vector3.zero;
+				go.transform.localScale = Vector3.one;
 				go.transform.eulerAngles = rotation;
 			}
 		}
